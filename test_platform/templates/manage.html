@@ -1,13 +1,9 @@
-<html>
-<head>
-    <!--    引用本地静态文件-->
-    {% load static %}
-    <link href='{% static "css/classic.css" %}' rel='stylesheet' type='text/css'/>
-</head>
-<body>
+{% extends "base.html" %}
 
+{% block base %}
 
 <div class="wrapper">
+
     <nav id="sidebar" class="sidebar">
 
         <!--导航-->
@@ -111,35 +107,9 @@
             <div class="container-fluid p-0">
                 <div class="row">
                     <div class="col-12 col-lg-7 col-xl-8 d-flex">
-                        <div class="card flex-fill">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0" style="float:left">项目管理</h5>
-                                <button type="button" onclick="add()" class="btn btn-primary" style="float:right">创建</button>
-                            </div>
-                            <table id="datatables-dashboard-traffic" class="table table-striped my-0">
-                                <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>名称</th>
-                                    <th>描述</th>
-                                    <th>状态</th>
-                                    <th>创建时间</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                        {% block manage %}
 
-                                {% for p in projects %}
-                                <tr>
-                                    <td>{{p.id}}</td>
-                                    <td>{{p.name}}</td>
-                                    <td>{{p.desribe}}</td>
-                                    <td>{{p.status}}</td>
-                                    <td>{{p.create_time}}</td>
-                                </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                        {% endblock %}
                     </div>
                 </div>
 
@@ -173,13 +143,8 @@
                 </div>
             </div>
         </footer>
-        <script>
-            function add(){
-                window.open('/project/add');
-            }
-        </script>>
+
     </div>
 </div>
 
-</body>
-</html>
+{% endblock%}

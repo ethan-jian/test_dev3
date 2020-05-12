@@ -11,7 +11,7 @@ def mange(request):
     项目管理
     """
     project_list = Project.objects.all()
-    return render(request, 'manage.html', {'projects': project_list})
+    return render(request, 'project_list.html', {'projects': project_list})
 
 
 def add_project(request):
