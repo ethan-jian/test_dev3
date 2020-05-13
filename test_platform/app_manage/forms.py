@@ -10,7 +10,7 @@ class ProjectForm(forms.Form):
     describe = forms.CharField(label='描述',
                                widget=widgets.Textarea(attrs={'class': "form-control"}))
 
-    status = forms.BooleanField(label='状态', required=True,
+    status = forms.BooleanField(label='状态', required=False,
                                 widget=widgets.CheckboxInput())
 
 
