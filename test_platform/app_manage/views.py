@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from app_manage.models import Project
-from app_manage.forms import ProjectForm
+from app_manage.forms import ProjectForm, ProjectEditForm
 
 # Create your views here.
 
@@ -34,6 +34,28 @@ def add_project(request):
     return render(request, 'project_add.html', {'form': form})
 
 
-# def mange(requset):
-#     pass
-#     # return render(requset)
+def edit_project(request, pid):
+    """编辑项目"""
+    if request.method == 'POST': #更新项目
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            describe = form.cleaned_data['describe']
+            status = form.cleaned_data['status']
+            p = Project.objects.get(id=pid)
+            p.name = name
+            p.describe = describe
+            p.status = status
+            p.save()
+
+        return HttpResponseRedirect('/project/')
+
+    else:
+        if pid:
+            p = Project.objects.get(id=pid)
+            form = ProjectEditForm(instance=p)
+        else:
+            form = ProjectForm()
+
+        return render(request, 'project_edit.html', {
+            'form': form, 'id': pid})
