@@ -31,7 +31,9 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user) #记录用户的登录状态
-            return HttpResponseRedirect('/manage/')
+            response = HttpResponseRedirect('/manage/')
+            response.set_cookie('user', username, 3600)
+            return response
         else:
             return render(request, 'login.html', {
                 'error': '用户名或密码错误!'

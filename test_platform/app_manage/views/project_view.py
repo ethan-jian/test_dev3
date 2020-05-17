@@ -11,9 +11,10 @@ def list_project(request):
     """
     项目管理
     """
+    username = request.COOKIES.get('user', '')
     project_list = Project.objects.all()
-    return render(request, 'project/list.html', {'projects': project_list})
-
+    return render(request, 'project/list.html', {'projects': project_list,
+                                                 'user': username})
 
 def add_project(request):
     """
