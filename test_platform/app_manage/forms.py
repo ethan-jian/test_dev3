@@ -1,10 +1,10 @@
 from django import forms
 from django.forms import widgets
-from app_manage.models import Project
+from app_manage.models import Project, Module
 
 
 class ProjectForm(forms.Form):
-    """表单"""
+    """新增项目表单"""
     name = forms.CharField(label='名称',
                            max_length=100,
                            widget=widgets.TextInput(attrs={'class': "form-control"}))
@@ -17,8 +17,17 @@ class ProjectForm(forms.Form):
 
 
 class ProjectEditForm(forms.ModelForm):
-    """表单"""
+    """编辑项目表单"""
     class Meta:
         model = Project
         fields = ['name', 'describe', 'status']
+
+
+
+class ModuleForm(forms.ModelForm):
+    """模块表单"""
+    class Meta:
+        model = Module
+        fields = ['project', 'name', 'describe']
+
 
